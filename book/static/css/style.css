@@ -1,7 +1,93 @@
-body {
-    background-color: black;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-h1 {
-    color: white;
+/* Plano de fundo e fonte */
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* Container do login */
+.login-container {
+  background: #ffffff;
+  padding: 2rem 2.5rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Título e descrição */
+.login-container h1 {
+  margin-bottom: 0.5rem;
+  color: #333333;
+}
+.login-container p {
+  margin-bottom: 1.5rem;
+  color: #666666;
+  font-size: 0.95rem;
+}
+
+/* Agrupamento de campos */
+.form-row {
+  display: grid;
+  gap: 1rem;
+}
+
+/* Form-group styling */
+.form-group {
+  text-align: left;
+}
+
+/* Labels */
+.form-group label {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: #444444;
+  font-size: 0.9rem;
+}
+
+/* Inputs */
+.form-group input {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+.form-group input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+/* Botão */
+button {
+  margin-top: 1.2rem;
+  width: 100%;
+  padding: 0.7rem;
+  background: #667eea;
+  color: #ffffff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+button:hover {
+  background: #5a67d8;
+}
+
+@media (max-width: 480px) {
+  .login-container {
+    padding: 1.5rem 1.8rem;
+  }
 }
