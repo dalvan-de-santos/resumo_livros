@@ -4,25 +4,32 @@ from .models import Users
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib import auth
+from django.contrib.auth import logout
+from .forms import LivrosForm
+from django.contrib.auth.decorators import login_required
+from rolepermissions.decorators import has_permission_decorator
 
 def homepage(request):
     return render(request, 'pages/index.html')
 
-
+@has_permission_decorator('criar_usuario')
 def criar_editor(request):
 
     if request.method == "GET":
-        return render(request, 'pages/criar_editor.html')
+        editor = Users.objects.filter(cargo="E")
+        return render(request, 'pages/criar_editor.html', {'editores': editor})
     
     if request.method == "POST":
         email = request.POST.get('email')
         senha = request.POST.get('senha')
+        first_name = request.POST.get('name')
+        last_name = request.POST.get('sobrenome')
 
         user = Users.objects.filter(email=email)
         if user.exists():
             return HttpResponse('email ja existe')
         
-        user = Users.objects.create_user(username=email, email=email, password=senha, cargo="E" )
+        user = Users.objects.create_user(username=email, email=email, first_name=first_name, last_name=last_name, password=senha, cargo="E" )
 
 
         return HttpResponse('ok')
@@ -45,6 +52,29 @@ def loginn(request):
         return redirect(reverse('adm'))
     return render(request, 'pages/loginn.html')
 
+@login_required
+def logoutt(request):
+    logout(request)
+    return redirect('login')
 
+
+@login_required
 def adm(request):
     return render(request, 'pages/adm.html')
+
+
+@login_required
+def criar_post(request):
+
+    if request.method == "POST":
+        form = LivrosForm(request.POST, request.FILES)
+        if form.is_valid():
+            livro = form.save(commit=False)
+            livro.publicado_por = request.user
+            livro.save()
+            return redirect('adm')
+    else:
+        form = LivrosForm()
+
+
+    return render(request, 'pages/criar_post.html', {'form': form})

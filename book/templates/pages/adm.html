@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>ADM</h1>
+    <header class="admin-header">
+  <nav class="admin-nav">
+    <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+    <a href="{% url 'criar_post' %}" class="nav-link">Criar Post</a>
+    <a href="{% url 'criar_editor' %}" class="nav-link">Cadastrar Editor</a>
+  </nav>
+</header>
 {% endblock %}

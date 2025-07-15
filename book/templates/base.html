@@ -5,6 +5,22 @@
     {% include "partials/_head.html" %}
 </head>
 <body>
+    <nav class="navbar">
+  <div class="logo">
+    <a href="#">MinhaLogo</a>
+  </div>
+    <ul class="nav-links">
+            <li><a href="{% url 'homepage' %}">Home</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            <li><a href="{% url 'adm' %}">ADM</a></li>
+            <li><a href="#contato">Contato</a></li>
+    </ul>
+  <div class="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+  </div>
+</nav>
     {% block content %}{% endblock content %}
 </body>
 </html>
