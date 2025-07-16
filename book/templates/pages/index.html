@@ -1,5 +1,44 @@
 {% extends "base.html" %}
    
 {% block content %}
- 
+     <div class="search">
+    <form action="" method="get">
+      <input
+        type="text"
+        name="q"
+        placeholder="Pesquisar livros..."
+        aria-label="Pesquisar livros"
+      ></input>
+      <button type="submit" aria-label="Buscar">
+        🔍
+      </button>
+    </form>
+  </div>
+   <div class="container">
+    <h1>Livros Disponíveis</h1>
+    <div class="grid">
+      {% for livro in livros %}
+        <div class="book-card">
+          {% if livro.picture %}
+            <div class="book-image-wrapper">
+              <img src="{{ livro.picture.url }}" alt="Capa de {{ livro.title }}">
+            </div>
+          {% endif %}
+          <div class="book-card-content">
+            <a href="#" class="book-title">
+              {{ livro.title }}
+            </a>
+            <div class="field">
+              <span class="field-label">Editora</span>
+              <span class="field-value">{{ livro.empresa_publicada }}</span>
+            </div>
+            <div class="field">
+              <span class="field-label">Gênero</span>
+              <span class="field-value">{{ livro.genero.name }}</span>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 {% endblock content %}

@@ -27,7 +27,7 @@
           <input type="password" id="inputPassword4" name="senha" placeholder="••••••••" />
         </div>
       </div>
-      <button type="submit">Entrar</button>
+      <button type="submit">Cadastrar</button>
     </form>
   </div>
 
@@ -50,7 +50,7 @@
           <td>{{ editor.last_name }}</td>
           <td>{{ editor.email }}</td>
           <td>{{ editor.last_login }}</td>
-          <td><a href="#">Excluir</a></td>
+          <td><a href="{% url 'delete_editor' editor.id %}">Excluir</a></td>
         </tr>
       </tbody>
     {% endfor %}

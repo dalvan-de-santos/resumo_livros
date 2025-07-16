@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from .models import Users
+from .models import Users, Livros
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib import auth
@@ -10,7 +10,8 @@ from django.contrib.auth.decorators import login_required
 from rolepermissions.decorators import has_permission_decorator
 
 def homepage(request):
-    return render(request, 'pages/index.html')
+    livros = Livros.objects.all()
+    return render(request, 'pages/index.html', {'livros': livros})
 
 @has_permission_decorator('criar_usuario')
 def criar_editor(request):
@@ -32,7 +33,7 @@ def criar_editor(request):
         user = Users.objects.create_user(username=email, email=email, first_name=first_name, last_name=last_name, password=senha, cargo="E" )
 
 
-        return HttpResponse('ok')
+        return redirect('criar_editor')
 
 
 
@@ -59,6 +60,7 @@ def logoutt(request):
 
 
 @login_required
+@has_permission_decorator('acessar_adm')
 def adm(request):
     return render(request, 'pages/adm.html')
 
@@ -78,3 +80,10 @@ def criar_post(request):
 
 
     return render(request, 'pages/criar_post.html', {'form': form})
+
+@has_permission_decorator('criar_usuario')
+def delete_editor(request, id):
+    user = get_object_or_404(Users, id=id)
+    user.delete()
+    
+    return redirect('criar_editor')

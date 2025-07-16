@@ -1,4 +1,5 @@
 {% load static %}
+{% load permission_tags %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -12,7 +13,9 @@
     <ul class="nav-links">
             <li><a href="{% url 'homepage' %}">Home</a></li>
             <li><a href="{% url 'login' %}">Login</a></li>
-            <li><a href="{% url 'adm' %}">ADM</a></li>
+            {% if user|can:'acessar_adm' %}
+              <li><a href="{% url 'adm' %}">ADM</a></li>
+            {% endif %}
             <li><a href="#contato">Contato</a></li>
     </ul>
   <div class="menu-toggle">

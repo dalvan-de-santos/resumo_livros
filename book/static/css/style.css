@@ -283,3 +283,143 @@ button:hover {
 }
 
 /* ---------------------------------- */
+
+ .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      color: #1a1a1a;
+    }
+
+    /* Grid de cards */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .book-card {
+      width: 450px;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .book-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .book-image-wrapper {
+      width: 60%;
+      height: 0;
+      padding-top: 60%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .book-image-wrapper img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .book-card-content {
+      padding: 1rem 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .book-title {
+      font-size: 1.25rem;
+      color: #000dff;
+      text-decoration: none;
+      margin-bottom: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .book-title:hover {
+      text-decoration: underline;
+    }
+
+    .field {
+      margin-top: 0.5rem;
+      flex-grow: 1;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: #777;
+      margin-bottom: 0.25rem;
+      letter-spacing: 0.5px;
+    }
+
+    .field-value {
+      font-size: 0.95rem;
+      color: #333;
+      font-weight: 500;
+    }
+
+/* ------------------------------------------------ */
+
+.search {
+      max-width: 400px;
+      margin: 2rem auto;
+    }
+
+    /* Form com posição relativa para o botão interno */
+    .search form {
+      position: relative;
+    }
+
+    /* Input estilizado */
+    .search input[type="text"] {
+      width: 100%;
+      padding: 0.75rem 3rem 0.75rem 1rem;
+      font-size: 1rem;
+      border: 2px solid #ddd;
+      border-radius: 50px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    /* Foco no input */
+    .search input[type="text"]:focus {
+      border-color: #000dff;
+      box-shadow: 0 0 6px rgba(0, 13, 255, 0.2);
+      outline: none;
+    }
+
+    /* Botão de submit posicionado sobre o input */
+    .search button {
+      position: absolute;
+      top: 50%;
+      right: 0.75rem;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.25rem;
+      color: #777;
+      padding: 0;
+      line-height: 1;
+    }
+
+    /* Efeito hover no ícone */
+    .search button:hover {
+      color: #000dff;
+    }
+  /* ---------------------------------------------- */

@@ -20,9 +20,11 @@ class LivrosForm(formes.ModelForm):
             'title',
             'author',
             'resumo',
+            'ano',
             'empresa_publicada',
             'picture',
             'publicado_por',
+            'genero',
         ]
         widgets = {
             'resumo': formes.Textarea(attrs={'rows': 4}),
