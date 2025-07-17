@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+    
+     <div class="container">
+    <div class="card">
+      <div class="card-header">
+        {% for livro in livros %}
+        <h1>{{ livro.title }}</h1>
+        <p>por {{ livro.author }} — {{ livro.ano }}</p>
+      </div>
+      <div class="card-body">
+        {% if livro.picture %}
+          <img src="{{ livro.picture.url }}" alt="Capa de {{ livro.title }}">
+        {% endif %}
+
+        <div class="field">
+          <span class="field-label">Resumo:</span>
+          <span class="field-value">{{ livro.resumo }}</span>
+        </div>
+
+        <div class="field">
+          <span class="field-label">Editora</span>
+          <span class="field-value">{{ livro.empresa_publicada }}</span>
+        </div>
+
+        <div class="field">
+          <span class="field-label">Gênero</span>
+          <span class="field-value">{{ livro.genero.name }}</span>
+        </div>
+
+        <div class="field">
+          <span class="field-label">Publicado por</span>
+          <span class="field-value">
+            {% if livro.publicado_por %}
+              {{ livro.publicado_por.username }}
+            {% else %}
+              Anônimo
+            {% endif %}
+            em {{ livro.publicado_em|date:"d/m/Y H:i" }}
+          </span>
+        </div>
+
+        <a href="{% url 'homepage' %}" class="back-link">← Voltar à lista</a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock content %}

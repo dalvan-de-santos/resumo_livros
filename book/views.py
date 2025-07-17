@@ -87,3 +87,9 @@ def delete_editor(request, id):
     user.delete()
     
     return redirect('criar_editor')
+
+
+def detalhe_livro(request, id):
+    livro = Livros.objects.filter(id=id)
+    print(livro)
+    return render(request, 'pages/detalhe_livro.html', {'livros': livro})
