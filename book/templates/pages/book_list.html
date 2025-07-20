@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+     <h1>Pesquisar Livros</h1>
+
+  <form method="get" action="{% url 'buscar_livros' %}">
+    <input type="text" name="q" placeholder="Título ou autor" value="{{ termo }}">
+    <button type="submit">Buscar</button>
+  </form>
+
+  {% if livros %}
+    <h2>Resultados para “{{ termo }}”</h2>
+
+    {% for livro in livros %}
+      <div class="book">
+        {% if livro.capa %}
+          <div class="cover">
+            <img src="{{ livro.capa }}" alt="Capa de {{ livro.titulo }}">
+          </div>
+        {% endif %}
+        <h3>{{ livro.titulo }}</h3>
+        <p><strong>Autor(es):</strong> {{ livro.autores|join:", " }}</p>
+        <p><strong>Editora:</strong> {{ livro.editora }}</p>
+        <p><strong>Ano:</strong> {{ livro.ano }}</p>
+        <p><strong>Gênero:</strong> {{ livro.generos|join:", " }}</p>
+        <p>{{ livro.resumo|truncatewords:50 }}</p>
+        <div style="clear: both;"></div>
+      </div>
+    {% endfor %}
+
+  {% elif termo %}
+    <p>Nenhum livro encontrado para “{{ termo }}”.</p>
+  {% endif %}
+{% endblock %}

@@ -8,7 +8,7 @@
 <body>
     <nav class="navbar">
   <div class="logo">
-    <a href="#">MinhaLogo</a>
+    <a href="#">ViwesBooks</a>
   </div>
     <ul class="nav-links">
             <li><a href="{% url 'homepage' %}">Home</a></li>
@@ -16,7 +16,7 @@
             {% if user|can:'acessar_adm' %}
               <li><a href="{% url 'adm' %}">ADM</a></li>
             {% endif %}
-            <li><a href="#contato">Contato</a></li>
+            <li><a href="#">Contato</a></li>
     </ul>
   <div class="menu-toggle">
         <span></span>

@@ -8,6 +8,7 @@ from django.contrib.auth import logout
 from .forms import LivrosForm
 from django.contrib.auth.decorators import login_required
 from rolepermissions.decorators import has_permission_decorator
+import requests
 
 def homepage(request):
     livros = Livros.objects.all()
@@ -66,6 +67,7 @@ def adm(request):
 
 
 @login_required
+@has_permission_decorator('criar_post')
 def criar_post(request):
 
     if request.method == "POST":
@@ -93,3 +95,28 @@ def detalhe_livro(request, id):
     livro = Livros.objects.filter(id=id)
     print(livro)
     return render(request, 'pages/detalhe_livro.html', {'livros': livro})
+
+
+def buscar_livro(request):
+    termo = request.GET.get("q", "")
+    livros = []
+
+    if termo:
+        url = "https://www.googleapis.com/books/v1/volumes"
+        params = {"q": termo, "maxResults": 10}
+        resp = requests.get(url, params=params).json()
+        
+        for item in resp.get("items", []):
+            info = item.get("volumeInfo", {})
+            livros.append({
+                "titulo": info.get("title"),
+                "autores": info.get("authors", []),
+                "resumo": info.get("description", ""),
+                "ano": info.get("publishedDate", ""),
+                "editora": info.get("publisher", ""),
+                "capa": info.get("imageLinks", {}).get("thumbnail"),
+                "generos": info.get("categories", []),
+            })
+
+            return render(request, 'pages/book_list.html', {'livros': livros, 'termo': termo})
+    return render(request, 'pages/book_list.html')
